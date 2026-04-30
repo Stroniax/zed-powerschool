@@ -1,0 +1,7 @@
+id = "powerschool"
+name = "PowerSchool"
+version = "0.0.1"
+schema_version = 1
+authors = ["Caleb Frederickson"]
+description = "PS-HTML including TLIST_SQL syntax highlighting for PowerSchool customizations"
+repository = "https://github.com/Stroniax/zed-powerschool"
