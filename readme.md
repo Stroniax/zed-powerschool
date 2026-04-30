@@ -5,12 +5,18 @@
 ### MVP
 
 - [ ] Syntax highlighting for PowerSchool HTML files
-    - [ ] DAT tag highlighting
-        - `~[if]`
-        - `~(gpv.*)`
-        - `~([TABLE]COL)`
-    - [ ] Input mapping
-        - `<input type="text" name="[STUDENTS]LASTFIRST" />`
+  - [ ] DAT tag highlighting
+    - `~[if]`
+    - `~(gpv.*)`
+    - `~([TABLE]COL)`
+  - [ ] Input mapping
+    - `<input type="text" name="[STUDENTS]LASTFIRST" />`
+  - [ ] Wildcard highlighting, validation, and path quick navigation
+    - [ ] `~[wc:some_file]` hyperlinks to `/wilcards/some_file.txt`
+      - [ ] (root eg `/wildcards` can be configured)
+    - [ ] Validation that associated file exists
+      - [ ] Configurable list of predefined wildcards for workspaces that reference a wildcard not contained in the workspace
+    - [ ] Hover to show contents of associated file
 
 ### TODO
 
