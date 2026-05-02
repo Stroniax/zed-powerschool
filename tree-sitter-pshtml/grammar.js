@@ -1,20 +1,16 @@
-//@ts-check
-
 /**
  * @file PowerSchool HTML
  * @author Caleb Frederickson
  * @license MIT
  */
 
-import html from "tree-sitter-html/grammar";
-
 /// <reference types="tree-sitter-cli/dsl" />
 // @ts-check
 
-export default grammar({
+const html = require("tree-sitter-html/grammar");
+
+module.exports = grammar(html, {
   name: "pshtml",
 
-  rules: {
-    ...html.rules,
-  },
+  rules: {},
 });
