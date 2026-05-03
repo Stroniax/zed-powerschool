@@ -1,0 +1,26 @@
+===
+TLIST_SQL NoneMessage HTML
+===
+~[tlist_sql;select 1 from dual;nonemessage=<p>Thats not gonna work</p>]
+<p>
+    Greetings ~(col0), I am ~(col_1;l;if.test=1;then=happy;else=not happy, Bob).
+</p>
+[/tlist_sql]
+
+---
+(document
+  (dat
+    (tlist_sql
+      (tlist_query)
+      (tlist_option
+        (tlist_nonemessage))
+      (tlist_template
+        (tlist_template_text)
+        (tlist_variable)
+        (tlist_template_text)
+        (tlist_variable
+          (tlist_variable_option)
+          (tlist_variable_option)
+          (tlist_variable_option)
+          (tlist_variable_option))
+        (tlist_template_text)))))

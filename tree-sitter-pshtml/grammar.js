@@ -13,7 +13,7 @@ module.exports = grammar(html, {
   name: "pshtml",
 
   rules: {
-    dat: ($) => choice($.gpv, $.database_field_access),
+    dat: ($) => choice($.gpv, $.database_field_access, $.tlist_sql),
 
     ps_identifier: ($) => /[a-zA-Z0-9_]+/,
 
@@ -44,6 +44,28 @@ module.exports = grammar(html, {
         alias($.ps_identifier, $.database_field_name),
         ")",
       ),
+
+    tlist_sql: ($) =>
+      seq(
+        "~[tlist_sql;",
+        $.tlist_query,
+        repeat($.tlist_option),
+        "]",
+        $.tlist_template,
+        "[/tlist_sql]",
+      ),
+
+    tlist_query: ($) => /[^;\]]+/,
+    tlist_nonemessage: ($) => seq(";nonemessage", /[^;\]]+/),
+    tlist_option: ($) => choice($.tlist_nonemessage),
+    // For now the template will not "parse" its content except the variables...
+    tlist_template: ($) =>
+      repeat1(
+        choice($.tlist_variable, alias(/[^~\[]+/, $.tlist_template_text)),
+      ),
+    tlist_variable: ($) =>
+      seq("~(", /[^;\)]+/, repeat($.tlist_variable_option), ")"),
+    tlist_variable_option: ($) => seq(";", /[^;)]+/),
 
     // ps_condition_label: ($) => seq("#", $.ps_identifier),
     // ps_condition_operator: ($) => choice("=", "!=", ">", "<"),
