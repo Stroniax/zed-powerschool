@@ -13,7 +13,7 @@ module.exports = grammar(html, {
   name: "pshtml",
 
   rules: {
-    dat: ($) => choice($.gpv),
+    dat: ($) => choice($.gpv, $.database_field_access),
 
     ps_identifier: ($) => /[a-zA-Z0-9_]+/,
 
@@ -35,6 +35,16 @@ module.exports = grammar(html, {
       ),
     gpv_if_blank_then: ($) => seq(";if.blank.then=", /[^;\)]+/),
 
+    database_field_access: ($) =>
+      seq(
+        "~([",
+        alias($.ps_identifier, $.database_table_name),
+        optional(seq(".", alias($.ps_identifier, $.database_extention_name))),
+        "]",
+        alias($.ps_identifier, $.database_field_name),
+        ")",
+      ),
+
     // ps_condition_label: ($) => seq("#", $.ps_identifier),
     // ps_condition_operator: ($) => choice("=", "!=", ">", "<"),
     // ps_condition_path: ($) => /[^=><!\]]+/,
@@ -48,16 +58,11 @@ module.exports = grammar(html, {
     //   ),
 
     // HTML overrides
-    text: ($) =>
-      prec.right(
-        repeat1(
-          choice(
-            $.dat,
-            /[^<~]+/, // normal text
-            "~", // fallback so parser doesn't choke
-          ),
-        ),
-      ),
+    // The easiest way to parse is to just not permit tilde in a "text" syntax node, though it is technically valid when not followed by open paren or bracket.
+    text: (_) => /[^<>&\s~]([^<>&~]*[^<>&\s~])?/,
+    // Extend HTML node to include DAT, since it is technically valid anywhere in the document
+    _node: ($, original) => choice($.dat, /** @type { Rule } */ (original)),
+    // Extend quoted attribute value to include DAT within text
     quoted_attribute_value: ($) =>
       choice(
         seq(
@@ -71,6 +76,7 @@ module.exports = grammar(html, {
           "'",
         ),
       ),
+    // Extend attribute itself to permit a DAT as an attribute
     attribute: ($, original) =>
       choice(
         $.dat,
@@ -81,6 +87,7 @@ module.exports = grammar(html, {
           ),
         ),
       ),
+    // Restrict attribute name to not permit tilde, though technically it would be valid without being followed by open paren or bracket
     attribute_name: ($) => /[^<>"'/=~\s]+/,
   },
 });

@@ -22,13 +22,11 @@ GPV (with & without opts, in attr & text)
         (dat
           (gpv
             (ps_identifier)))))
-    (text
-      (dat
-        (gpv
-          (ps_identifier)
-          (gpv_option
-            (gpv_if_blank_then))
-          (gpv_option))))
+    (dat
+      (gpv
+        (ps_identifier)
+        (gpv_option
+          (gpv_if_blank_then))
+        (gpv_option)))
     (end_tag
-      (tag_name)))
-  (text))
+      (tag_name))))
