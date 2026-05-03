@@ -13,30 +13,74 @@ module.exports = grammar(html, {
   name: "pshtml",
 
   rules: {
-    ps_dat: ($) => choice($.ps_square_dat, $.ps_smooth_dat),
+    dat: ($) => choice($.gpv),
 
-    ps_square_dat: ($) => seq("~[", $.ps_square_dat_identifier, "]"),
-    ps_smooth_dat: ($) => seq("~(", $.ps_smooth_dat_identifier, ")"),
+    ps_identifier: ($) => /[a-zA-Z0-9_]+/,
 
-    ps_square_dat_identifier: ($) => /[^\]]+/,
-    ps_smooth_dat_identifier: ($) => /[^\)]+/,
+    gpv: ($) =>
+      seq("~(gpv.", $.ps_identifier, optional(repeat($.gpv_option)), ")"),
+    gpv_option: ($) =>
+      choice(
+        ";encodejsstring",
+        ";encodejsonstring",
+        ";urlencode",
+        ";encodehtml",
+        ";num",
+        ";sqlText",
+        $.gpv_if_blank_then,
+        ";onlynumeric",
+        ";onlyalpha",
+        ";onlyalphanumeric",
+        ";onlydatecharacters",
+      ),
+    gpv_if_blank_then: ($) => seq(";if.blank.then=", /[^;\)]+/),
 
-    // Override HTML text to permit DAT
+    // ps_condition_label: ($) => seq("#", $.ps_identifier),
+    // ps_condition_operator: ($) => choice("=", "!=", ">", "<"),
+    // ps_condition_path: ($) => /[^=><!\]]+/,
+    // ps_if: ($) =>
+    //   seq(
+    //     "if",
+    //     optional($.ps_condition_label),
+    //     $.ps_condition_path,
+    //     $.ps_condition_operator,
+    //     $.ps_square_dat_identifier,
+    //   ),
+
+    // HTML overrides
     text: ($) =>
       prec.right(
         repeat1(
           choice(
-            $.ps_dat,
+            $.dat,
             /[^<~]+/, // normal text
             "~", // fallback so parser doesn't choke
           ),
         ),
       ),
-    // Override HTML attribute value to permit DAT
     quoted_attribute_value: ($) =>
       choice(
-        seq('"', repeat(choice($.ps_dat, /[^"]/)), '"'),
-        seq("'", repeat(choice($.ps_dat, /[^']/)), "'"),
+        seq(
+          '"',
+          optional(alias(repeat(choice($.dat, /[^"]/)), $.attribute_value)),
+          '"',
+        ),
+        seq(
+          "'",
+          optional(alias(repeat(choice($.dat, /[^']/)), $.attribute_value)),
+          "'",
+        ),
       ),
+    attribute: ($, original) =>
+      choice(
+        $.dat,
+        seq(
+          $.attribute_name,
+          optional(
+            seq("=", choice($.attribute_value, $.quoted_attribute_value)),
+          ),
+        ),
+      ),
+    attribute_name: ($) => /[^<>"'/=~\s]+/,
   },
 });

@@ -1,0 +1,34 @@
+===
+GPV (with & without opts, in attr & text)
+===
+<div style="scale: ~(gpv.attr;num)" ~(gpv.x)>
+    ~(gpv.foo;if.blank.then=Another Value;sqlText)
+</div>
+
+---
+(document
+  (element
+    (start_tag
+      (tag_name)
+      (attribute
+        (attribute_name)
+        (quoted_attribute_value
+          (attribute_value
+            (dat
+              (gpv
+                (ps_identifier)
+                (gpv_option))))))
+      (attribute
+        (dat
+          (gpv
+            (ps_identifier)))))
+    (text
+      (dat
+        (gpv
+          (ps_identifier)
+          (gpv_option
+            (gpv_if_blank_then))
+          (gpv_option))))
+    (end_tag
+      (tag_name)))
+  (text))
