@@ -7,5 +7,5 @@ description = "PS-HTML including TLIST_SQL syntax highlighting for PowerSchool c
 repository = "https://github.com/Stroniax/zed-powerschool"
 
 [grammars.pshtml]
-repository = "file://./tree-sitter-pshtml/"
-rev = "6cc246be3920ea08cb8a6c65f3da81348ef299da"
+repository = "https://github.com/Stroniax/tree-sitter-pshtml"
+rev = "6aff00cd12c2a3c6972ada09c3877cb7f9c6c50e"
