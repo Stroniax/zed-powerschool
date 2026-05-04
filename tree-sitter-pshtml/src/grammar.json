@@ -594,8 +594,13 @@
           "value": "~(gpv."
         },
         {
-          "type": "SYMBOL",
-          "name": "ps_identifier"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "ps_identifier"
+          },
+          "named": true,
+          "value": "gpv_name"
         },
         {
           "type": "CHOICE",

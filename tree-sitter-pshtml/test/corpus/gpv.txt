@@ -16,16 +16,16 @@ GPV (with & without opts, in attr & text)
           (attribute_value
             (dat
               (gpv
-                (ps_identifier)
+                (gpv_name)
                 (gpv_option
                   (gpv_escape_option)))))))
       (attribute
         (dat
           (gpv
-            (ps_identifier)))))
+            (gpv_name)))))
     (dat
       (gpv
-        (ps_identifier)
+        (gpv_name)
         (gpv_option
           (gpv_if_blank_then))
         (gpv_option

@@ -299,11 +299,11 @@
       "required": true,
       "types": [
         {
-          "type": "gpv_option",
+          "type": "gpv_name",
           "named": true
         },
         {
-          "type": "ps_identifier",
+          "type": "gpv_option",
           "named": true
         }
       ]
@@ -922,6 +922,10 @@
   },
   {
     "type": "gpv_escape_option",
+    "named": true
+  },
+  {
+    "type": "gpv_name",
     "named": true
   },
   {

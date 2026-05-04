@@ -29,7 +29,12 @@ module.exports = grammar(html, {
     ps_identifier: ($) => /[a-zA-Z0-9_]+/,
 
     gpv: ($) =>
-      seq("~(gpv.", $.ps_identifier, optional(repeat($.gpv_option)), ")"),
+      seq(
+        "~(gpv.",
+        alias($.ps_identifier, $.gpv_name),
+        optional(repeat($.gpv_option)),
+        ")",
+      ),
     gpv_option: ($) =>
       choice(
         alias(";encodejsstring", $.gpv_escape_option),
