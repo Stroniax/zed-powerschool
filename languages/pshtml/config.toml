@@ -1,6 +1,6 @@
 name = "PowerSchool HTML"
 grammar = "pshtml"
-path_suffixes = ["html", "txt", "json"]
+path_suffixes = ["html"]
 line_comments = []
 tab_size = 2
 hard_tabs = false

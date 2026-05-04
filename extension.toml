@@ -8,4 +8,4 @@ repository = "https://github.com/Stroniax/zed-powerschool"
 
 [grammars.pshtml]
 repository = "https://github.com/Stroniax/tree-sitter-pshtml"
-rev = "6aff00cd12c2a3c6972ada09c3877cb7f9c6c50e"
+rev = "b8a575fe1dfdbc9ba9c24971a156b1a46c262ea5"
