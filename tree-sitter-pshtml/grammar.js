@@ -30,7 +30,7 @@ module.exports = grammar(html, {
       seq(
         "~([",
         alias($.dat_name_part, $.database_table_name),
-        optional(seq(".", alias($.dat_name_part, $.database_extention_name))),
+        optional(seq(".", alias($.dat_name_part, $.database_extension_name))),
         "]",
         alias($.dat_name_part, $.database_field_name),
         repeat(alias($.paren_dat_option, $.dat_option)),

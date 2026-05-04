@@ -5,7 +5,8 @@
   "scripts": {
     "test": "tree-sitter test",
     "build": "tree-sitter generate",
-    "scratch": "npm run build && tree-sitter parse scratch.html"
+    "scratch": "npm run build && tree-sitter parse scratch.html",
+    "highlight": "npm run build && tree-sitter highlight scratch.html"
   },
   "keywords": [],
   "author": "",

@@ -20,7 +20,7 @@ Database Field Access ~([TABLE.EXT]FIELD)
     (dat
       (database_field_access
         (database_table_name)
-        (database_extention_name)
+        (database_extension_name)
         (database_field_name)))
     (text)
     (end_tag

@@ -1,7 +1,7 @@
 name = "PS-HTML"
 grammar = "ps-html"
-path_suffixes = ["html","txt","json"]
+path_suffixes = ["html", "txt", "json"]
 line_comments = []
-tab_size = 4
+tab_size = 2
 hard_tabs = false
 first_line_pattern = "<!-- PS-HTML -->"

@@ -6,12 +6,11 @@
       "camelcase": "PsHtml",
       "title": "PS-HTML",
       "scope": "source.pshtml",
-      "file-types": [
-        ".html",
-        ".txt"
-      ],
+      "file-types": ["html", "txt"],
       "injection-regex": "^pshtml$",
-      "class-name": "TreeSitterPshtml"
+      "class-name": "TreeSitterPshtml",
+      "content-regex": "~[\\(\\[][\\[\\w]",
+      "highlights": "queries/highlights.scm"
     }
   ],
   "metadata": {
@@ -25,8 +24,7 @@
       }
     ],
     "links": {
-      "repository": "https://github.com/Stroniax/zed-powerschool",
-      "funding": ""
+      "repository": "https://github.com/Stroniax/zed-powerschool"
     }
   },
   "bindings": {

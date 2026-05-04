@@ -154,7 +154,7 @@
           "named": true
         },
         {
-          "type": "database_extention_name",
+          "type": "database_extension_name",
           "named": true
         },
         {
@@ -825,7 +825,7 @@
     "named": true
   },
   {
-    "type": "database_extention_name",
+    "type": "database_extension_name",
     "named": true
   },
   {

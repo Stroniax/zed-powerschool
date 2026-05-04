@@ -600,7 +600,7 @@
                     "name": "dat_name_part"
                   },
                   "named": true,
-                  "value": "database_extention_name"
+                  "value": "database_extension_name"
                 }
               ]
             },

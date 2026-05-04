@@ -120,7 +120,7 @@ enum ts_symbol_identifiers {
   aux_sym_dat_name_repeat1 = 98,
   alias_sym_dat_option_operator = 99,
   alias_sym_dat_target = 100,
-  alias_sym_database_extention_name = 101,
+  alias_sym_database_extension_name = 101,
   alias_sym_database_field_name = 102,
   alias_sym_database_table_name = 103,
   alias_sym_ps_condition_label = 104,
@@ -231,7 +231,7 @@ static const char * const ts_symbol_names[] = {
   [aux_sym_dat_name_repeat1] = "dat_name_repeat1",
   [alias_sym_dat_option_operator] = "dat_option_operator",
   [alias_sym_dat_target] = "dat_target",
-  [alias_sym_database_extention_name] = "database_extention_name",
+  [alias_sym_database_extension_name] = "database_extension_name",
   [alias_sym_database_field_name] = "database_field_name",
   [alias_sym_database_table_name] = "database_table_name",
   [alias_sym_ps_condition_label] = "ps_condition_label",
@@ -342,7 +342,7 @@ static const TSSymbol ts_symbol_map[] = {
   [aux_sym_dat_name_repeat1] = aux_sym_dat_name_repeat1,
   [alias_sym_dat_option_operator] = alias_sym_dat_option_operator,
   [alias_sym_dat_target] = alias_sym_dat_target,
-  [alias_sym_database_extention_name] = alias_sym_database_extention_name,
+  [alias_sym_database_extension_name] = alias_sym_database_extension_name,
   [alias_sym_database_field_name] = alias_sym_database_field_name,
   [alias_sym_database_table_name] = alias_sym_database_table_name,
   [alias_sym_ps_condition_label] = alias_sym_ps_condition_label,
@@ -757,7 +757,7 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .visible = true,
     .named = true,
   },
-  [alias_sym_database_extention_name] = {
+  [alias_sym_database_extension_name] = {
     .visible = true,
     .named = true,
   },
@@ -821,7 +821,7 @@ static const TSSymbol ts_alias_sequences[PRODUCTION_ID_COUNT][MAX_ALIAS_SEQUENCE
   },
   [10] = {
     [1] = alias_sym_database_table_name,
-    [3] = alias_sym_database_extention_name,
+    [3] = alias_sym_database_extension_name,
     [5] = alias_sym_database_field_name,
   },
 };
