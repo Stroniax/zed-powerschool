@@ -75,6 +75,10 @@
           "named": true
         },
         {
+          "type": "dat_comment",
+          "named": true
+        },
+        {
           "type": "database_field_access",
           "named": true
         },
@@ -104,6 +108,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "dat_comment",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "database_field_access",
@@ -783,6 +792,10 @@
     "named": false
   },
   {
+    "type": ":",
+    "named": false
+  },
+  {
     "type": ";",
     "named": false
   },
@@ -989,6 +1002,10 @@
   },
   {
     "type": "~[",
+    "named": false
+  },
+  {
+    "type": "~[Comment",
     "named": false
   },
   {

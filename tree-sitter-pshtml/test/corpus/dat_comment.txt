@@ -1,0 +1,17 @@
+===
+DAT comments
+===
+~[Comment: This is a colon comment]
+Hi ~[Comment; This is a semicolon comment, which I prefer]
+~[Comment; also, they can contain ~(DATs) that are ~(not) quite ignored, but not displayed. Should I parse its children?]
+
+---
+
+(document
+  (dat
+    (dat_comment))
+  (text)
+  (dat
+    (dat_comment))
+  (dat
+    (dat_comment)))

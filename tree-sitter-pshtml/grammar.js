@@ -19,6 +19,7 @@ module.exports = grammar(html, {
         $.database_field_access,
         $.tlist_sql,
         $.ps_if,
+        $.dat_comment,
         $.context_dat,
         $.invoker_dat,
         prec(-1, $.unrecognized_square_dat),
@@ -147,6 +148,8 @@ module.exports = grammar(html, {
         "~[x:version;long]",
         "~[x:version;full]",
       ),
+
+    dat_comment: ($) => seq("~[Comment", choice(";", ":"), /[^\]]+/, "]"),
 
     unrecognized_square_dat: ($) => seq("~[", /[^\]]+/, "]"),
     unrecognized_paren_dat: ($) => seq("~(", /[^)]+/, ")"),

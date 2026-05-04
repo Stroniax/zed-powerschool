@@ -554,6 +554,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "dat_comment"
+        },
+        {
+          "type": "SYMBOL",
           "name": "context_dat"
         },
         {
@@ -1275,6 +1279,36 @@
         {
           "type": "STRING",
           "value": "~[x:version;full]"
+        }
+      ]
+    },
+    "dat_comment": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "~[Comment"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": ";"
+            },
+            {
+              "type": "STRING",
+              "value": ":"
+            }
+          ]
+        },
+        {
+          "type": "PATTERN",
+          "value": "[^\\]]+"
+        },
+        {
+          "type": "STRING",
+          "value": "]"
         }
       ]
     },
