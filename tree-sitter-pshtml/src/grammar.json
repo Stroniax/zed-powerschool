@@ -505,7 +505,7 @@
       "members": [
         {
           "type": "PATTERN",
-          "value": "[^<>&\\s~\\[]([^<>&~\\[]*[^<>&\\s~\\[])?"
+          "value": "[^[<>&\\s~]([^\\[<>&~]*[^\\[<>&\\s~])?"
         },
         {
           "type": "PREC",
@@ -694,7 +694,7 @@
             "type": "ALIAS",
             "content": {
               "type": "PATTERN",
-              "value": "[^~\\[]+"
+              "value": "[^\\[~]+"
             },
             "named": true,
             "value": "tlist_template_text"
@@ -711,7 +711,7 @@
         },
         {
           "type": "PATTERN",
-          "value": "[^;\\)]+"
+          "value": "[^;)]+"
         },
         {
           "type": "REPEAT",
@@ -1061,7 +1061,7 @@
           "type": "ALIAS",
           "content": {
             "type": "PATTERN",
-            "value": "[^\\);=]+"
+            "value": "[^);=]+"
           },
           "named": true,
           "value": "dat_option_name"
@@ -1092,7 +1092,7 @@
                       },
                       {
                         "type": "PATTERN",
-                        "value": "[^\\);]+"
+                        "value": "[^);]+"
                       }
                     ]
                   },
@@ -1170,7 +1170,7 @@
           "type": "ALIAS",
           "content": {
             "type": "PATTERN",
-            "value": "[^\\);]+"
+            "value": "[^);]+"
           },
           "named": true,
           "value": "dat_name"

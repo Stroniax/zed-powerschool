@@ -16,12 +16,13 @@ module.exports = grammar(html, {
 
   supertypes: ($) => [$.inline_dat],
 
+  // oxlint-disable no-useless-escape tree-sitter requires square bracket open within a NOT range to be escaped again
   rules: {
     dat: ($) => choice($.tlist_sql, $.ps_if, $.inline_dat),
     inline_dat: ($) =>
       choice(prec(2, $.database_field_access), $.paren_dat, $.square_dat),
 
-    dat_name_part: ($) => /[a-zA-Z0-9_]+/,
+    dat_name_part: (_) => /[a-zA-Z0-9_]+/,
 
     database_field_access: ($) =>
       seq(
@@ -44,15 +45,15 @@ module.exports = grammar(html, {
         "[/tlist_sql]",
       ),
 
-    tlist_query: ($) => /[^;\]]+/,
+    tlist_query: (_) => /[^;\]]+/,
     // For now the template will not "parse" its content except the variables...
     tlist_template: ($) =>
       repeat1(
-        choice($.tlist_variable, alias(/[^~\[]+/, $.tlist_template_text)),
+        choice($.tlist_variable, alias(/[^\[~]+/, $.tlist_template_text)),
       ),
     tlist_variable: ($) =>
-      seq("~(", /[^;\)]+/, repeat($.tlist_variable_option), ")"),
-    tlist_variable_option: ($) => choice(";l;format=time", /;[^;)]+/),
+      seq("~(", /[^;)]+/, repeat($.tlist_variable_option), ")"),
+    tlist_variable_option: (_) => choice(";l;format=time", /;[^;)]+/),
 
     ps_if: ($) =>
       seq(
@@ -77,12 +78,12 @@ module.exports = grammar(html, {
       ),
     _ps_condition_label: ($) =>
       seq("#", alias($.dat_name_part, $.ps_condition_label)),
-    ps_condition_operator: ($) => choice("=", "<>", ">", "<"),
+    ps_condition_operator: (_) => choice("=", "<>", ">", "<"),
 
     ps_condition_path: ($) =>
       choice($.inline_dat, token(prec(-1, /[^=><\]\s]+/))),
 
-    square_dat_target: ($) => seq(":", /[^\];]+/),
+    square_dat_target: (_) => seq(":", /[^\];]+/),
     square_dat_option: ($) =>
       seq(
         ";",
@@ -97,11 +98,11 @@ module.exports = grammar(html, {
     paren_dat_option: ($) =>
       seq(
         ";",
-        alias(/[^\);=]+/, $.dat_option_name),
+        alias(/[^);=]+/, $.dat_option_name),
         optional(
           seq(
             alias("=", $.dat_option_operator),
-            alias(choice($.paren_dat, /[^\);]+/), $.dat_option_value),
+            alias(choice($.paren_dat, /[^);]+/), $.dat_option_value),
           ),
         ),
       ),
@@ -117,7 +118,7 @@ module.exports = grammar(html, {
     paren_dat: ($) =>
       seq(
         "~(",
-        alias(/[^\);]+/, $.dat_name),
+        alias(/[^);]+/, $.dat_name),
         repeat(alias($.paren_dat_option, $.dat_option)),
         ")",
       ),
@@ -126,7 +127,7 @@ module.exports = grammar(html, {
     // The easiest way to parse is to just not permit tilde in a "text" syntax node, though it is technically valid when not followed by open paren or bracket.
     text: (_) =>
       choice(
-        /[^<>&\s~\[]([^<>&~\[]*[^<>&\s~\[])?/,
+        /[^\[<>&\s~]([^\[<>&~]*[^\[<>&\s~])?/,
         prec(-1, "["),
         prec(-1, "~"),
       ),
@@ -157,7 +158,7 @@ module.exports = grammar(html, {
         ),
       ),
     // Extend attribute itself to permit a DAT as an attribute
-    attribute: ($, original) =>
+    attribute: ($) =>
       choice(
         $.dat,
         seq(
@@ -168,6 +169,6 @@ module.exports = grammar(html, {
         ),
       ),
     // Restrict attribute name to not permit tilde, though technically it would be valid without being followed by open paren or bracket
-    attribute_name: ($) => /[^<>"'/=~\s]+/,
+    attribute_name: (_) => /[^<>"'/=~\s]+/,
   },
 });
