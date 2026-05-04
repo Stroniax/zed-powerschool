@@ -13,7 +13,15 @@ module.exports = grammar(html, {
   name: "pshtml",
 
   rules: {
-    dat: ($) => choice($.gpv, $.database_field_access, $.tlist_sql, $.ps_if),
+    dat: ($) =>
+      choice(
+        $.gpv,
+        $.database_field_access,
+        $.tlist_sql,
+        $.ps_if,
+        $.unrecognized_square_dat,
+        $.unrecognized_paren_dat,
+      ),
 
     ps_identifier: ($) => /[a-zA-Z0-9_]+/,
 
@@ -109,6 +117,9 @@ module.exports = grammar(html, {
     // TODO: does not handle "in" and "not in" operators
     ps_condition_path: ($) =>
       choice($.database_field_access, $.gpv, token(prec(-1, /[^=><\]\s]+/))),
+
+    unrecognized_square_dat: ($) => seq("~[", /[^\]]+/, "]"),
+    unrecognized_paren_dat: ($) => seq("~(", /[^)]+/, ")"),
 
     // HTML overrides
     // The easiest way to parse is to just not permit tilde in a "text" syntax node, though it is technically valid when not followed by open paren or bracket.

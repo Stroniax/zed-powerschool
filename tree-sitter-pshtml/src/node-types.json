@@ -64,6 +64,14 @@
         {
           "type": "tlist_sql",
           "named": true
+        },
+        {
+          "type": "unrecognized_paren_dat",
+          "named": true
+        },
+        {
+          "type": "unrecognized_square_dat",
+          "named": true
         }
       ]
     }
@@ -684,6 +692,16 @@
     "fields": {}
   },
   {
+    "type": "unrecognized_paren_dat",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "unrecognized_square_dat",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "\"",
     "named": false
   },
@@ -914,6 +932,10 @@
   },
   {
     "type": "~(gpv.",
+    "named": false
+  },
+  {
+    "type": "~[",
     "named": false
   },
   {

@@ -543,6 +543,14 @@
         {
           "type": "SYMBOL",
           "name": "ps_if"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "unrecognized_square_dat"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "unrecognized_paren_dat"
         }
       ]
     },
@@ -1103,6 +1111,40 @@
               "value": "[^=><\\]\\s]+"
             }
           }
+        }
+      ]
+    },
+    "unrecognized_square_dat": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "~["
+        },
+        {
+          "type": "PATTERN",
+          "value": "[^\\]]+"
+        },
+        {
+          "type": "STRING",
+          "value": "]"
+        }
+      ]
+    },
+    "unrecognized_paren_dat": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "~("
+        },
+        {
+          "type": "PATTERN",
+          "value": "[^)]+"
+        },
+        {
+          "type": "STRING",
+          "value": ")"
         }
       ]
     }

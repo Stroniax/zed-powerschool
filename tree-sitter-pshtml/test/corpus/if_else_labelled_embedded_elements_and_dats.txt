@@ -41,7 +41,9 @@ if block, labelled, embedded elements & DATs
                 (attribute
                   (attribute_name)
                   (quoted_attribute_value
-                    (attribute_value))))
+                    (attribute_value
+                      (dat
+                        (unrecognized_paren_dat))))))
               (dat
                 (database_field_access
                   (database_table_name)
