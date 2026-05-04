@@ -16,6 +16,8 @@ module.exports = grammar(html, {
 
   supertypes: ($) => [$.inline_dat],
 
+  extras: ($) => [$.comment, $.comment_dat, /\s+/],
+
   // oxlint-disable no-useless-escape tree-sitter requires square bracket open within a NOT range to be escaped again
   rules: {
     dat: ($) => choice($.tlist_sql, $.ps_if, $.inline_dat),
@@ -79,11 +81,27 @@ module.exports = grammar(html, {
     _ps_condition_label: ($) =>
       seq("#", alias($.dat_name_part, $.ps_condition_label)),
     ps_condition_operator: (_) => choice("=", "<>", ">", "<"),
-
     ps_condition_path: ($) =>
       choice($.inline_dat, token(prec(-1, /[^=><\]\s]+/))),
 
-    square_dat_target: (_) => seq(":", /[^\];]+/),
+    comment_dat: (_) => seq("~[Comment", choice(":", ";"), /[^\]]+/, "]"),
+
+    square_dat: ($) =>
+      seq(
+        "~[",
+        $.dat_name,
+        optional(seq(":", alias($.dat_name, $.dat_target))),
+        repeat(alias($.square_dat_option, $.dat_option)),
+        "]",
+      ),
+    paren_dat: ($) =>
+      seq(
+        "~(",
+        $.dat_name,
+        repeat(alias($.paren_dat_option, $.dat_option)),
+        ")",
+      ),
+    dat_name: ($) => seq($.dat_name_part, repeat(seq(".", $.dat_name_part))),
     square_dat_option: ($) =>
       seq(
         ";",
@@ -91,7 +109,7 @@ module.exports = grammar(html, {
         optional(
           seq(
             alias(choice("=", ":"), $.dat_option_operator),
-            alias(choice($.paren_dat, /[^\];]+/), $.dat_option_value),
+            alias(choice($.inline_dat, /[^\];]+/), $.dat_option_value),
           ),
         ),
       ),
@@ -102,25 +120,9 @@ module.exports = grammar(html, {
         optional(
           seq(
             alias("=", $.dat_option_operator),
-            alias(choice($.paren_dat, /[^);]+/), $.dat_option_value),
+            alias(choice($.inline_dat, /[^);]+/), $.dat_option_value),
           ),
         ),
-      ),
-
-    square_dat: ($) =>
-      seq(
-        "~[",
-        alias(/[^\];:]+/, $.dat_name),
-        optional(alias($.square_dat_target, $.dat_target)),
-        repeat(alias($.square_dat_option, $.dat_option)),
-        "]",
-      ),
-    paren_dat: ($) =>
-      seq(
-        "~(",
-        alias(/[^);]+/, $.dat_name),
-        repeat(alias($.paren_dat_option, $.dat_option)),
-        ")",
       ),
 
     // HTML overrides

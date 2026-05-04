@@ -16,16 +16,22 @@ GPV (with & without opts, in attr & text)
           (attribute_value
             (dat
               (paren_dat
-                (dat_name)
+                (dat_name
+                  (dat_name_part)
+                  (dat_name_part))
                 (dat_option
                   (dat_option_name)))))))
       (attribute
         (dat
           (paren_dat
-            (dat_name)))))
+            (dat_name
+              (dat_name_part)
+              (dat_name_part))))))
     (dat
       (paren_dat
-        (dat_name)
+        (dat_name
+          (dat_name_part)
+          (dat_name_part))
         (dat_option
           (dat_option_name)
           (dat_option_operator)

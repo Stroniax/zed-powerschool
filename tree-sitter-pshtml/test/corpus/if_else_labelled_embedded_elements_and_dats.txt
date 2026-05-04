@@ -43,7 +43,8 @@ if/else, labelled, embedded elements & DATs
                     (attribute_value
                       (dat
                         (paren_dat
-                          (dat_name)))))))
+                          (dat_name
+                            (dat_name_part))))))))
               (dat
                 (database_field_access
                   (database_table_name)
