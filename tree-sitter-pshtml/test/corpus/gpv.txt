@@ -17,7 +17,8 @@ GPV (with & without opts, in attr & text)
             (dat
               (gpv
                 (ps_identifier)
-                (gpv_option))))))
+                (gpv_option
+                  (gpv_escape_option)))))))
       (attribute
         (dat
           (gpv
@@ -27,6 +28,7 @@ GPV (with & without opts, in attr & text)
         (ps_identifier)
         (gpv_option
           (gpv_if_blank_then))
-        (gpv_option)))
+        (gpv_option
+          (gpv_escape_option))))
     (end_tag
       (tag_name))))

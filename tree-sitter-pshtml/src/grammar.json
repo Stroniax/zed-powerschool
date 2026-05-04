@@ -594,48 +594,98 @@
       "type": "CHOICE",
       "members": [
         {
-          "type": "STRING",
-          "value": ";encodejsstring"
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ";encodejsstring"
+          },
+          "named": true,
+          "value": "gpv_escape_option"
         },
         {
-          "type": "STRING",
-          "value": ";encodejsonstring"
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ";encodejsonstring"
+          },
+          "named": true,
+          "value": "gpv_escape_option"
         },
         {
-          "type": "STRING",
-          "value": ";urlencode"
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ";urlencode"
+          },
+          "named": true,
+          "value": "gpv_escape_option"
         },
         {
-          "type": "STRING",
-          "value": ";encodehtml"
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ";encodehtml"
+          },
+          "named": true,
+          "value": "gpv_escape_option"
         },
         {
-          "type": "STRING",
-          "value": ";num"
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ";num"
+          },
+          "named": true,
+          "value": "gpv_escape_option"
         },
         {
-          "type": "STRING",
-          "value": ";sqlText"
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ";sqlText"
+          },
+          "named": true,
+          "value": "gpv_escape_option"
         },
         {
           "type": "SYMBOL",
           "name": "gpv_if_blank_then"
         },
         {
-          "type": "STRING",
-          "value": ";onlynumeric"
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ";onlynumeric"
+          },
+          "named": true,
+          "value": "gpv_escape_option"
         },
         {
-          "type": "STRING",
-          "value": ";onlyalpha"
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ";onlyalpha"
+          },
+          "named": true,
+          "value": "gpv_escape_option"
         },
         {
-          "type": "STRING",
-          "value": ";onlyalphanumeric"
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ";onlyalphanumeric"
+          },
+          "named": true,
+          "value": "gpv_escape_option"
         },
         {
-          "type": "STRING",
-          "value": ";onlydatecharacters"
+          "type": "ALIAS",
+          "content": {
+            "type": "STRING",
+            "value": ";onlydatecharacters"
+          },
+          "named": true,
+          "value": "gpv_escape_option"
         }
       ]
     },
