@@ -21,8 +21,8 @@ module.exports = grammar(html, {
         $.ps_if,
         $.context_dat,
         $.invoker_dat,
-        $.unrecognized_square_dat,
-        $.unrecognized_paren_dat,
+        prec(-1, $.unrecognized_square_dat),
+        prec(-1, $.unrecognized_paren_dat),
       ),
 
     ps_identifier: ($) => /[a-zA-Z0-9_]+/,
@@ -151,6 +151,24 @@ module.exports = grammar(html, {
     unrecognized_square_dat: ($) => seq("~[", /[^\]]+/, "]"),
     unrecognized_paren_dat: ($) => seq("~(", /[^)]+/, ")"),
 
+    database_field_attribute: ($) =>
+      seq(
+        alias("name", $.attribute_name),
+        "=",
+        choice(
+          seq("'", alias($.database_field_lookup, $.attribute_value), "'"),
+          seq('"', alias($.database_field_lookup, $.attribute_value), '"'),
+        ),
+      ),
+    database_field_lookup: ($) =>
+      seq(
+        "[",
+        alias($.ps_identifier, $.database_table_name),
+        optional(seq(".", alias($.ps_identifier, $.database_extention_name))),
+        "]",
+        alias($.ps_identifier, $.database_field_name),
+      ),
+
     // HTML overrides
     // The easiest way to parse is to just not permit tilde in a "text" syntax node, though it is technically valid when not followed by open paren or bracket.
     text: (_) =>
@@ -189,6 +207,7 @@ module.exports = grammar(html, {
     attribute: ($, original) =>
       choice(
         $.dat,
+        prec(2, $.database_field_attribute),
         seq(
           $.attribute_name,
           optional(

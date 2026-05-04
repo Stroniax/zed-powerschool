@@ -1,0 +1,25 @@
+===
+database field attribute
+===
+<input type="text" name="[STUDENTS.U_STUDENTS_EXTENSION]NICKNAME" value=""/>
+
+---
+
+(document
+  (element
+    (self_closing_tag
+      (tag_name)
+      (attribute
+        (attribute_name)
+        (quoted_attribute_value
+          (attribute_value)))
+      (attribute
+        (database_field_attribute
+          (attribute_name)
+          (attribute_value
+            (database_table_name)
+            (database_extention_name)
+            (database_field_name))))
+      (attribute
+        (attribute_name)
+        (quoted_attribute_value)))))

@@ -20,6 +20,10 @@
           "named": true
         },
         {
+          "type": "database_field_attribute",
+          "named": true
+        },
+        {
           "type": "quoted_attribute_value",
           "named": true
         }
@@ -36,6 +40,18 @@
       "types": [
         {
           "type": "dat",
+          "named": true
+        },
+        {
+          "type": "database_extention_name",
+          "named": true
+        },
+        {
+          "type": "database_field_name",
+          "named": true
+        },
+        {
+          "type": "database_table_name",
           "named": true
         }
       ]
@@ -107,6 +123,25 @@
         },
         {
           "type": "database_table_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "database_field_attribute",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "attribute_name",
+          "named": true
+        },
+        {
+          "type": "attribute_value",
           "named": true
         }
       ]
