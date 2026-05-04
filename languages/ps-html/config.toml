@@ -1,7 +1,8 @@
-name = "PS-HTML"
-grammar = "ps-html"
+name = "pshtml"
+grammar = "pshtml"
 path_suffixes = ["html", "txt", "json"]
 line_comments = []
 tab_size = 2
 hard_tabs = false
 first_line_pattern = "<!-- PS-HTML -->"
+scope = "source.pshtml"
