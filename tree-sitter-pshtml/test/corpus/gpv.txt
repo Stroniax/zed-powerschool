@@ -15,20 +15,22 @@ GPV (with & without opts, in attr & text)
         (quoted_attribute_value
           (attribute_value
             (dat
-              (gpv
-                (gpv_name)
-                (gpv_option
-                  (gpv_escape_option)))))))
+              (paren_dat
+                (dat_name)
+                (dat_option
+                  (dat_option_name)))))))
       (attribute
         (dat
-          (gpv
-            (gpv_name)))))
+          (paren_dat
+            (dat_name)))))
     (dat
-      (gpv
-        (gpv_name)
-        (gpv_option
-          (gpv_if_blank_then))
-        (gpv_option
-          (gpv_escape_option))))
+      (paren_dat
+        (dat_name)
+        (dat_option
+          (dat_option_name)
+          (dat_option_operator)
+          (dat_option_value))
+        (dat_option
+          (dat_option_name))))
     (end_tag
       (tag_name))))

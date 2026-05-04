@@ -12,8 +12,7 @@ I suppose you can come in.
   (dat
     (ps_if
       (ps_if_tag
-        (ps_condition_label
-          (ps_identifier))
+        (ps_condition_label)
         (ps_if_condition
           (ps_condition_path
             (database_field_access
@@ -37,5 +36,4 @@ I suppose you can come in.
       (ps_else_content
         (text))
       (ps_if_end_tag
-        (ps_condition_label
-          (ps_identifier))))))
+        (ps_condition_label)))))

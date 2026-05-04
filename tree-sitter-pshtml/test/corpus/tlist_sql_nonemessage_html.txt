@@ -12,8 +12,10 @@ TLIST_SQL NoneMessage HTML
   (dat
     (tlist_sql
       (tlist_query)
-      (tlist_option
-        (tlist_nonemessage))
+      (dat_option
+        (dat_option_name)
+        (dat_option_operator)
+        (dat_option_value))
       (tlist_template
         (tlist_template_text)
         (tlist_variable)

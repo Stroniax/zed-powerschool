@@ -7,4 +7,5 @@ Context DAT
 
 (document
   (dat
-    (context_dat)))
+    (paren_dat
+      (dat_name))))

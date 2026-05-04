@@ -1,5 +1,5 @@
 ===
-if block, labelled, embedded elements & DATs
+if/else, labelled, embedded elements & DATs
 ===
 <div class="prose">
     <p>
@@ -28,8 +28,7 @@ if block, labelled, embedded elements & DATs
       (dat
         (ps_if
           (ps_if_tag
-            (ps_condition_label
-              (ps_identifier))
+            (ps_condition_label)
             (ps_if_condition
               (ps_condition_path)
               (ps_condition_operator)
@@ -43,7 +42,8 @@ if block, labelled, embedded elements & DATs
                   (quoted_attribute_value
                     (attribute_value
                       (dat
-                        (context_dat))))))
+                        (paren_dat
+                          (dat_name)))))))
               (dat
                 (database_field_access
                   (database_table_name)
@@ -51,16 +51,14 @@ if block, labelled, embedded elements & DATs
               (end_tag
                 (tag_name))))
           (ps_if_else_tag
-            (ps_condition_label
-              (ps_identifier)))
+            (ps_condition_label))
           (ps_else_content
             (dat
               (database_field_access
                 (database_table_name)
                 (database_field_name))))
           (ps_if_end_tag
-            (ps_condition_label
-              (ps_identifier)))))
+            (ps_condition_label))))
       (text)
       (end_tag
         (tag_name)))

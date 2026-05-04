@@ -9,9 +9,17 @@ Hi ~[Comment; This is a semicolon comment, which I prefer]
 
 (document
   (dat
-    (dat_comment))
+    (square_dat
+      (dat_name)
+      (dat_target)))
   (text)
   (dat
-    (dat_comment))
+    (square_dat
+      (dat_name)
+      (dat_option
+        (dat_option_name))))
   (dat
-    (dat_comment)))
+    (square_dat
+      (dat_name)
+      (dat_option
+        (dat_option_name)))))

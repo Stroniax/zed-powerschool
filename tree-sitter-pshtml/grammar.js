@@ -12,52 +12,28 @@ const html = require("tree-sitter-html/grammar");
 module.exports = grammar(html, {
   name: "pshtml",
 
+  inline: ($) => [$._ps_condition_label],
+
   rules: {
     dat: ($) =>
       choice(
-        $.gpv,
-        $.database_field_access,
         $.tlist_sql,
         $.ps_if,
-        $.dat_comment,
-        $.context_dat,
-        $.invoker_dat,
-        prec(-1, $.unrecognized_square_dat),
-        prec(-1, $.unrecognized_paren_dat),
+        $.database_field_access,
+        prec(-1, $.paren_dat),
+        prec(-1, $.square_dat),
       ),
 
-    ps_identifier: ($) => /[a-zA-Z0-9_]+/,
-
-    gpv: ($) =>
-      seq(
-        "~(gpv.",
-        alias($.ps_identifier, $.gpv_name),
-        optional(repeat($.gpv_option)),
-        ")",
-      ),
-    gpv_option: ($) =>
-      choice(
-        alias(";encodejsstring", $.gpv_escape_option),
-        alias(";encodejsonstring", $.gpv_escape_option),
-        alias(";urlencode", $.gpv_escape_option),
-        alias(";encodehtml", $.gpv_escape_option),
-        alias(";num", $.gpv_escape_option),
-        alias(";sqlText", $.gpv_escape_option),
-        $.gpv_if_blank_then,
-        alias(";onlynumeric", $.gpv_escape_option),
-        alias(";onlyalpha", $.gpv_escape_option),
-        alias(";onlyalphanumeric", $.gpv_escape_option),
-        alias(";onlydatecharacters", $.gpv_escape_option),
-      ),
-    gpv_if_blank_then: ($) => seq(";if.blank.then=", /[^;\)]+/),
+    dat_name_part: ($) => /[a-zA-Z0-9_]+/,
 
     database_field_access: ($) =>
       seq(
         "~([",
-        alias($.ps_identifier, $.database_table_name),
-        optional(seq(".", alias($.ps_identifier, $.database_extention_name))),
+        alias($.dat_name_part, $.database_table_name),
+        optional(seq(".", alias($.dat_name_part, $.database_extention_name))),
         "]",
-        alias($.ps_identifier, $.database_field_name),
+        alias($.dat_name_part, $.database_field_name),
+        repeat(alias($.paren_dat_option, $.dat_option)),
         ")",
       ),
 
@@ -65,15 +41,13 @@ module.exports = grammar(html, {
       seq(
         "~[tlist_sql;",
         $.tlist_query,
-        repeat($.tlist_option),
+        repeat(alias($.square_dat_option, $.dat_option)),
         "]",
         $.tlist_template,
         "[/tlist_sql]",
       ),
 
     tlist_query: ($) => /[^;\]]+/,
-    tlist_nonemessage: ($) => seq(";nonemessage", /[^;\]]+/),
-    tlist_option: ($) => choice($.tlist_nonemessage),
     // For now the template will not "parse" its content except the variables...
     tlist_template: ($) =>
       repeat1(
@@ -81,19 +55,7 @@ module.exports = grammar(html, {
       ),
     tlist_variable: ($) =>
       seq("~(", /[^;\)]+/, repeat($.tlist_variable_option), ")"),
-    tlist_variable_option: ($) =>
-      choice(
-        ";d",
-        ";l;format=time",
-        ";url",
-        ";js",
-        ";json",
-        ";html",
-        ";xml10",
-        ";xml11",
-        ";ReplaceCRLFWithBR",
-        seq(";", /[^;)]+/),
-      ),
+    tlist_variable_option: ($) => choice(";l;format=time", /;[^;)]+/),
 
     ps_if: ($) =>
       seq(
@@ -105,76 +67,67 @@ module.exports = grammar(html, {
         $.ps_if_end_tag,
       ),
     ps_if_tag: ($) =>
-      seq("~[if", optional($.ps_condition_label), ".", $.ps_if_condition, "]"),
-    ps_if_else_tag: ($) => seq("[else", optional($.ps_condition_label), "]"),
-    ps_if_end_tag: ($) => seq("[/if", optional($.ps_condition_label), "]"),
-    // TODO: does not handle "in" and "not in " operators. Should add a third choice for these.
+      seq("~[if", optional($._ps_condition_label), ".", $.ps_if_condition, "]"),
+    ps_if_else_tag: ($) => seq("[else", optional($._ps_condition_label), "]"),
+    ps_if_end_tag: ($) => seq("[/if", optional($._ps_condition_label), "]"),
+    // TODO: does not handle "in" and "not in " operators. Should add a choice for these.
     ps_if_condition: ($) =>
-      choice(
-        alias($.ps_condition_path_only, $.ps_condition_path),
-        seq(
-          $.ps_condition_path,
-          $.ps_condition_operator,
-          alias(/[^\]]+/, $.ps_condition_operand),
+      seq(
+        $.ps_condition_path,
+        optional(
+          seq($.ps_condition_operator, alias(/[^\]]+/, $.ps_condition_operand)),
         ),
       ),
-    ps_condition_label: ($) => seq("#", $.ps_identifier),
+    _ps_condition_label: ($) =>
+      seq("#", alias($.dat_name_part, $.ps_condition_label)),
     ps_condition_operator: ($) => choice("=", "<>", ">", "<"),
 
-    ps_condition_path_only: ($) => choice("is.a.school", "is_prod"),
-    // TODO: does not handle "in" and "not in" operators
     ps_condition_path: ($) =>
-      choice($.database_field_access, $.gpv, token(prec(-1, /[^=><\]\s]+/))),
-
-    context_dat: ($) =>
       choice(
-        "~(curstudid)",
-        "~(studentfrn)",
-        "~(frn)",
-        "~(rn)",
-        "~(curyearid)",
-        "~(curtermid)",
-        "~(curschoolid)",
-        "~(curtchrid)",
+        $.database_field_access,
+        $.paren_dat,
+        $.square_dat,
+        token(prec(-1, /[^=><\]\s]+/)),
       ),
 
-    invoker_dat: ($) =>
-      choice(
-        "~[x:userid]",
-        "~[x:userid;guardianid]",
-        "~[x:users_dcid]",
-        "~[x:usersroles]",
-        "~[x:username]",
-        "~[eaodate]",
-        "~[date]",
-        "~[time]",
-        "~[x:version]",
-        "~[x:version;short]",
-        "~[x:version;long]",
-        "~[x:version;full]",
-      ),
-
-    dat_comment: ($) => seq("~[Comment", choice(";", ":"), /[^\]]+/, "]"),
-
-    unrecognized_square_dat: ($) => seq("~[", /[^\]]+/, "]"),
-    unrecognized_paren_dat: ($) => seq("~(", /[^)]+/, ")"),
-
-    database_field_attribute: ($) =>
+    square_dat_target: ($) => seq(":", /[^\];]+/),
+    square_dat_option: ($) =>
       seq(
-        alias("name", $.attribute_name),
-        "=",
-        choice(
-          seq("'", alias($.database_field_lookup, $.attribute_value), "'"),
-          seq('"', alias($.database_field_lookup, $.attribute_value), '"'),
+        ";",
+        alias(/[^\];:=]+/, $.dat_option_name),
+        optional(
+          seq(
+            alias(choice("=", ":"), $.dat_option_operator),
+            alias(choice($.paren_dat, /[^\];]+/), $.dat_option_value),
+          ),
         ),
       ),
-    database_field_lookup: ($) =>
+    paren_dat_option: ($) =>
       seq(
-        "[",
-        alias($.ps_identifier, $.database_table_name),
-        optional(seq(".", alias($.ps_identifier, $.database_extention_name))),
+        ";",
+        alias(/[^\);=]+/, $.dat_option_name),
+        optional(
+          seq(
+            alias("=", $.dat_option_operator),
+            alias(choice($.paren_dat, /[^\);]+/), $.dat_option_value),
+          ),
+        ),
+      ),
+
+    square_dat: ($) =>
+      seq(
+        "~[",
+        alias(/[^\];:]+/, $.dat_name),
+        optional(alias($.square_dat_target, $.dat_target)),
+        repeat(alias($.square_dat_option, $.dat_option)),
         "]",
-        alias($.ps_identifier, $.database_field_name),
+      ),
+    paren_dat: ($) =>
+      seq(
+        "~(",
+        alias(/[^\);]+/, $.dat_name),
+        repeat(alias($.paren_dat_option, $.dat_option)),
+        ")",
       ),
 
     // HTML overrides
@@ -215,7 +168,6 @@ module.exports = grammar(html, {
     attribute: ($, original) =>
       choice(
         $.dat,
-        prec(2, $.database_field_attribute),
         seq(
           $.attribute_name,
           optional(
