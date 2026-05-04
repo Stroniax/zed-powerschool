@@ -14,15 +14,12 @@ module.exports = grammar(html, {
 
   inline: ($) => [$._ps_condition_label],
 
+  supertypes: ($) => [$.inline_dat],
+
   rules: {
-    dat: ($) =>
-      choice(
-        $.tlist_sql,
-        $.ps_if,
-        $.database_field_access,
-        prec(-1, $.paren_dat),
-        prec(-1, $.square_dat),
-      ),
+    dat: ($) => choice($.tlist_sql, $.ps_if, $.inline_dat),
+    inline_dat: ($) =>
+      choice(prec(2, $.database_field_access), $.paren_dat, $.square_dat),
 
     dat_name_part: ($) => /[a-zA-Z0-9_]+/,
 
@@ -83,12 +80,7 @@ module.exports = grammar(html, {
     ps_condition_operator: ($) => choice("=", "<>", ">", "<"),
 
     ps_condition_path: ($) =>
-      choice(
-        $.database_field_access,
-        $.paren_dat,
-        $.square_dat,
-        token(prec(-1, /[^=><\]\s]+/)),
-      ),
+      choice($.inline_dat, token(prec(-1, /[^=><\]\s]+/))),
 
     square_dat_target: ($) => seq(":", /[^\];]+/),
     square_dat_option: ($) =>

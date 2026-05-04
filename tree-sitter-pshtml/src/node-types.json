@@ -1,5 +1,23 @@
 [
   {
+    "type": "inline_dat",
+    "named": true,
+    "subtypes": [
+      {
+        "type": "database_field_access",
+        "named": true
+      },
+      {
+        "type": "paren_dat",
+        "named": true
+      },
+      {
+        "type": "square_dat",
+        "named": true
+      }
+    ]
+  },
+  {
     "type": "attribute",
     "named": true,
     "fields": {},
@@ -50,19 +68,11 @@
       "required": true,
       "types": [
         {
-          "type": "database_field_access",
-          "named": true
-        },
-        {
-          "type": "paren_dat",
+          "type": "inline_dat",
           "named": true
         },
         {
           "type": "ps_if",
-          "named": true
-        },
-        {
-          "type": "square_dat",
           "named": true
         },
         {
@@ -313,15 +323,7 @@
       "required": false,
       "types": [
         {
-          "type": "database_field_access",
-          "named": true
-        },
-        {
-          "type": "paren_dat",
-          "named": true
-        },
-        {
-          "type": "square_dat",
+          "type": "inline_dat",
           "named": true
         }
       ]

@@ -538,23 +538,28 @@
         },
         {
           "type": "SYMBOL",
-          "name": "database_field_access"
-        },
+          "name": "inline_dat"
+        }
+      ]
+    },
+    "inline_dat": {
+      "type": "CHOICE",
+      "members": [
         {
           "type": "PREC",
-          "value": -1,
+          "value": 2,
           "content": {
             "type": "SYMBOL",
-            "name": "paren_dat"
+            "name": "database_field_access"
           }
         },
         {
-          "type": "PREC",
-          "value": -1,
-          "content": {
-            "type": "SYMBOL",
-            "name": "square_dat"
-          }
+          "type": "SYMBOL",
+          "name": "paren_dat"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "square_dat"
         }
       ]
     },
@@ -950,15 +955,7 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "database_field_access"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "paren_dat"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "square_dat"
+          "name": "inline_dat"
         },
         {
           "type": "TOKEN",
@@ -1250,6 +1247,8 @@
   "inline": [
     "_ps_condition_label"
   ],
-  "supertypes": [],
+  "supertypes": [
+    "inline_dat"
+  ],
   "reserved": {}
 }
