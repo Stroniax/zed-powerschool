@@ -6,6 +6,8 @@ authors = ["Caleb Frederickson"]
 description = "PS-HTML including TLIST_SQL syntax highlighting for PowerSchool customizations"
 repository = "https://github.com/Stroniax/zed-powerschool"
 
+snippets = ["./snippets/powerschool html.json"]
+
 [grammars.pshtml]
 repository = "https://github.com/Stroniax/tree-sitter-pshtml"
-rev = "b8a575fe1dfdbc9ba9c24971a156b1a46c262ea5"
+rev = "3a8d4c887f3ba2d36facc5170f2d9e3315ce1a20"

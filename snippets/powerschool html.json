@@ -1,0 +1,71 @@
+{
+  "Box": {
+    "description": "`box-round` with title and content for main section of content",
+    "prefix": "box-round",
+    "body": [
+      "<div class=\"box-round\">\n    <h2>${0:Your title here...}</h2>\n    <p>${1:Your content here...}</p> \n</div>",
+      "$0"
+    ]
+  },
+  "Navigation Tabs": {
+    "description": "Tabs with content rendered from separate HTML files",
+    "body": [
+      "\n<ul class=\"tabs\">\n    <li class=\"selected\"> \n        <a href=\"${1:#}\">${2:Tab One}</a> \n    </li>\n    <li>\n        <a href=\"${3:#}\">${4:Tab Two}</a>\n    </li>\n    <li>\n        <a href=\"${5:#}\">${6:Tab Three}</a>\n    </li> \n</ul>",
+      "$0"
+    ]
+  },
+  "Content Tabs": {
+    "description": "Tabs with content rendered from the current document",
+    "body": [
+      "<div class=\"tabs\">\n    <ul class=\"group\">\n        <li><a href=\"${1:#tabOneContent}\">${2:Tab One}</a></li>\n        <li><a href=\"${3:#tabTwoContent}\">${4:Tab Two}</a></li>\n        <li><a href=\"${5:#tabThreeContent}\">${6:Tab Three}</a></li>\n    </ul>\n    <div id=\"tabOneContent\">\n        <p>${7:Content 1 here}</p>\n    </div>\n    <div id=\"tabTwoContent\">\n        <p>${8:Content 2 here}</p>\n    </div>\n    <div id=\"tabThreeContent\">\n        <p>${9:Content 3 here}</p>\n    </div>\n</div>",
+      "$0"
+    ]
+  },
+  "Insert File": {
+    "prefix": "~[x:insertfile;",
+    "description": "Pre-render embedded content from a separate file",
+    "body": ["~[x:insertfile;${1:filename}]", "$0"]
+  },
+  "Wildcard": {
+    "prefix": "~[wc:",
+    "description": "Pre-render embedded content from a wildcard file",
+    "body": ["~[wc:${1:name}]", "$0"]
+  },
+  "Value from current cecord": {
+    "prefix": "~([",
+    "description": "Retrieve a value from the database for the current record",
+    "body": ["~([${1:STUDENTS}.${2:U_STUDENTS_EXTENSION}]${3:NICKNAME)", "$0"]
+  },
+  "Input for current cecord": {
+    "prefix": "<input name=",
+    "description": "An input that is associated with a database field",
+    "body": [
+      "<input name=\"[${1:STUDENTS}.${2:U_STUDENTS_EXTENSION}]${3:NICKNAME}\" value=\"\" />",
+      "$0"
+    ]
+  },
+  "Input to modify current record on admin portal": {
+    "prefix": "<input type=\"hidden\" name=\"ac\" value=\"prim\" />",
+    "description": "Required input to submit a form to update database fields by record locator",
+    "body": "<input type=\"hidden\" name=\"ac\" value=\"prim\" />"
+  },
+  "Input to modify current record on teachers portal": {
+    "prefix": "<input type=\"hidden\" name=\"ac\" value=\"webasmt\" />",
+    "description": "Required input to submit a form to update database fields by record locator",
+    "body": "<input type=\"hidden\" name=\"ac\" value=\"webasmt\" />"
+  },
+  "Admin Page": {
+    "description": "Empty page for admin portal",
+    "body": [
+      "<!DOCTYPE html>\r\n<html>\r\n<head>\r\n  <title>${1:Your Page Title Goes Here}</title>\r\n    <!-- required scripts -->\r\n    ~[wc:commonscripts]\r\n    <!-- Required style sheets: screen.css, and print.css -->\r\n    <link href=\"/images/css/screen.css\" rel=\"stylesheet\" media=\"screen\">\r\n    <link href=\"/images/css/print.css\" rel=\"stylesheet\" media=\"print\">\r\n  </head>\r\n<body>\r\n  ~[wc:admin_header_css]\r\n\r\n  <!-- breadcrumb start -->\r\n  ${0:Your breadcrumbs go here}\r\n  <!-- breadcrumb end -->\r\n\r\n  <!-- start of main menu and content -->\r\n  ~[wc:admin_navigation_css]\r\n\r\n  <!-- Start of Page -->\r\n  <h1>$1</h1>\r\n\r\n  <!-- start of content area -->\r\n  <div class=\"box-round\">\r\n    <h2>${2:Section Title Text Goes Here}</h2>\r\n    <p>\r\n      ${3:Your paragraph text goes here.}\r\n    </p>\r\n  </div>\r\n\r\n  <!-- end of content area -->\r\n  ~[wc:admin_footer_css]\r\n</body>\r\n</html>\r\n",
+      "$3"
+    ]
+  },
+  "Admin Student Page": {
+    "description": "Empty student page for admin portal",
+    "body": [
+      "<!DOCTYPE html>\r\n<html>\r\n<head>\r\n  <title>${1:Your Page Title Goes Here}</title>\r\n\r\n  <!-- required scripts -->\r\n  ~[wc:commonscripts]\r\n\r\n  <!-- Required style sheets: screen.css, and print.css -->\r\n  <link href=\"/images/css/screen.css\" rel=\"stylesheet\" media=\"screen\">\r\n  <link href=\"/images/css/print.css\" rel=\"stylesheet\" media=\"print\">\r\n</head>\r\n<body>\r\n  ~[wc:admin_header_frame_css]\r\n\r\n  <!-- breadcrumb start -->\r\n  <a href=\"/admin/home.html\" target=\"_top\">Start Page</a> &gt;\r\n  <a href=\"/admin/students/home.html?selectstudent=nosearch\" target=\"_top\">Student Selection</a> &gt;\r\n  $1\r\n\r\n  <!-- breadcrumb end -->\r\n  ~[wc:admin_navigation_frame_css]\r\n  ~[wc:changes_saved_or_deleted_header]\r\n\r\n  <!-- start of main menu and content -->\r\n  ~[wc:title_student_begin_css]\r\n  $1\r\n  ~[wc:title_student_end_css]\r\n\r\n  <form action=\"/~[self]~[if.gpv.recordSaved=]&recordSaved=1[/if]\" method=\"POST\">\r\n    <!-- start of content area -->\r\n    <div class=\"box-round\">\r\n      <h2>${2:Section Title Text Goes Here}</h2>\r\n      <p>\r\n        ${3:Your paragraph text goes here.}\r\n      </p>\r\n      <div class=\"button-row\"><input type=\"hidden\" name=\"ac\" value=\"prim\">~[submitbutton]</div>\r\n    </div>\r\n  </form>\r\n\r\n  <!-- end of content area -->\r\n  ~[wc:admin_footer_frame_css]\r\n</body>\r\n</html>\r\n",
+      "$3"
+    ]
+  }
+}

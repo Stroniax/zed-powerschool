@@ -4,3 +4,5 @@
 ("[else" @open "]" @close)
 ("[/if" @open "]" @close)
 ("~(" @open ")" @close)
+("<" @open ">" @close)
+("<" @open "/>" @close)

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>${1:Your Page Title Goes Here}</title>
+
+  <!-- required scripts -->
+  ~[wc:commonscripts]
+
+  <!-- Required style sheets: screen.css, and print.css -->
+  <link href="/images/css/screen.css" rel="stylesheet" media="screen">
+  <link href="/images/css/print.css" rel="stylesheet" media="print">
+</head>
+<body>
+  ~[wc:admin_header_frame_css]
+
+  <!-- breadcrumb start -->
+  <a href="/admin/home.html" target="_top">Start Page</a> &gt;
+  <a href="/admin/students/home.html?selectstudent=nosearch" target="_top">Student Selection</a> &gt;
+  $1
+
+  <!-- breadcrumb end -->
+  ~[wc:admin_navigation_frame_css]
+  ~[wc:changes_saved_or_deleted_header]
+
+  <!-- start of main menu and content -->
+  ~[wc:title_student_begin_css]
+  $1
+  ~[wc:title_student_end_css]
+
+  <form action="/~[self]~[if.gpv.recordSaved=]&recordSaved=1[/if]" method="POST">
+    <!-- start of content area -->
+    <div class="box-round">
+      <h2>${2:Section Title Text Goes Here}</h2>
+      <p>
+        ${3:Your paragraph text goes here.}
+      </p>
+      <div class="button-row"><input type="hidden" name="ac" value="prim">~[submitbutton]</div>
+    </div>
+  </form>
+
+  <!-- end of content area -->
+  ~[wc:admin_footer_frame_css]
+</body>
+</html>
