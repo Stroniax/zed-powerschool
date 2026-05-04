@@ -42,6 +42,11 @@
     }
   },
   {
+    "type": "context_dat",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "dat",
     "named": true,
     "fields": {},
@@ -50,11 +55,19 @@
       "required": true,
       "types": [
         {
+          "type": "context_dat",
+          "named": true
+        },
+        {
           "type": "database_field_access",
           "named": true
         },
         {
           "type": "gpv",
+          "named": true
+        },
+        {
+          "type": "invoker_dat",
           "named": true
         },
         {
@@ -275,6 +288,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "invoker_dat",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "ps_condition_label",
@@ -899,7 +917,39 @@
     "named": false
   },
   {
+    "type": "~(curschoolid)",
+    "named": false
+  },
+  {
+    "type": "~(curstudid)",
+    "named": false
+  },
+  {
+    "type": "~(curtchrid)",
+    "named": false
+  },
+  {
+    "type": "~(curtermid)",
+    "named": false
+  },
+  {
+    "type": "~(curyearid)",
+    "named": false
+  },
+  {
+    "type": "~(frn)",
+    "named": false
+  },
+  {
     "type": "~(gpv.",
+    "named": false
+  },
+  {
+    "type": "~(rn)",
+    "named": false
+  },
+  {
+    "type": "~(studentfrn)",
     "named": false
   },
   {
@@ -907,11 +957,59 @@
     "named": false
   },
   {
+    "type": "~[date]",
+    "named": false
+  },
+  {
+    "type": "~[eaodate]",
+    "named": false
+  },
+  {
     "type": "~[if",
     "named": false
   },
   {
+    "type": "~[time]",
+    "named": false
+  },
+  {
     "type": "~[tlist_sql;",
+    "named": false
+  },
+  {
+    "type": "~[x:userid;guardianid]",
+    "named": false
+  },
+  {
+    "type": "~[x:userid]",
+    "named": false
+  },
+  {
+    "type": "~[x:username]",
+    "named": false
+  },
+  {
+    "type": "~[x:users_dcid]",
+    "named": false
+  },
+  {
+    "type": "~[x:usersroles]",
+    "named": false
+  },
+  {
+    "type": "~[x:version;full]",
+    "named": false
+  },
+  {
+    "type": "~[x:version;long]",
+    "named": false
+  },
+  {
+    "type": "~[x:version;short]",
+    "named": false
+  },
+  {
+    "type": "~[x:version]",
     "named": false
   }
 ]

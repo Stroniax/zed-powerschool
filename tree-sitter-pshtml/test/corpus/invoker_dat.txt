@@ -1,0 +1,12 @@
+===
+Invoker DAT
+===
+This is ~[x:userid]'s way.
+
+---
+
+(document
+  (text)
+  (dat
+    (invoker_dat))
+  (text))

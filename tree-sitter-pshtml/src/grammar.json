@@ -546,6 +546,14 @@
         },
         {
           "type": "SYMBOL",
+          "name": "context_dat"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "invoker_dat"
+        },
+        {
+          "type": "SYMBOL",
           "name": "unrecognized_square_dat"
         },
         {
@@ -1161,6 +1169,96 @@
               "value": "[^=><\\]\\s]+"
             }
           }
+        }
+      ]
+    },
+    "context_dat": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "~(curstudid)"
+        },
+        {
+          "type": "STRING",
+          "value": "~(studentfrn)"
+        },
+        {
+          "type": "STRING",
+          "value": "~(frn)"
+        },
+        {
+          "type": "STRING",
+          "value": "~(rn)"
+        },
+        {
+          "type": "STRING",
+          "value": "~(curyearid)"
+        },
+        {
+          "type": "STRING",
+          "value": "~(curtermid)"
+        },
+        {
+          "type": "STRING",
+          "value": "~(curschoolid)"
+        },
+        {
+          "type": "STRING",
+          "value": "~(curtchrid)"
+        }
+      ]
+    },
+    "invoker_dat": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "~[x:userid]"
+        },
+        {
+          "type": "STRING",
+          "value": "~[x:userid;guardianid]"
+        },
+        {
+          "type": "STRING",
+          "value": "~[x:users_dcid]"
+        },
+        {
+          "type": "STRING",
+          "value": "~[x:usersroles]"
+        },
+        {
+          "type": "STRING",
+          "value": "~[x:username]"
+        },
+        {
+          "type": "STRING",
+          "value": "~[eaodate]"
+        },
+        {
+          "type": "STRING",
+          "value": "~[date]"
+        },
+        {
+          "type": "STRING",
+          "value": "~[time]"
+        },
+        {
+          "type": "STRING",
+          "value": "~[x:version]"
+        },
+        {
+          "type": "STRING",
+          "value": "~[x:version;short]"
+        },
+        {
+          "type": "STRING",
+          "value": "~[x:version;long]"
+        },
+        {
+          "type": "STRING",
+          "value": "~[x:version;full]"
         }
       ]
     },

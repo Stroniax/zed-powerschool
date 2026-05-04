@@ -19,6 +19,8 @@ module.exports = grammar(html, {
         $.database_field_access,
         $.tlist_sql,
         $.ps_if,
+        $.context_dat,
+        $.invoker_dat,
         $.unrecognized_square_dat,
         $.unrecognized_paren_dat,
       ),
@@ -117,6 +119,34 @@ module.exports = grammar(html, {
     // TODO: does not handle "in" and "not in" operators
     ps_condition_path: ($) =>
       choice($.database_field_access, $.gpv, token(prec(-1, /[^=><\]\s]+/))),
+
+    context_dat: ($) =>
+      choice(
+        "~(curstudid)",
+        "~(studentfrn)",
+        "~(frn)",
+        "~(rn)",
+        "~(curyearid)",
+        "~(curtermid)",
+        "~(curschoolid)",
+        "~(curtchrid)",
+      ),
+
+    invoker_dat: ($) =>
+      choice(
+        "~[x:userid]",
+        "~[x:userid;guardianid]",
+        "~[x:users_dcid]",
+        "~[x:usersroles]",
+        "~[x:username]",
+        "~[eaodate]",
+        "~[date]",
+        "~[time]",
+        "~[x:version]",
+        "~[x:version;short]",
+        "~[x:version;long]",
+        "~[x:version;full]",
+      ),
 
     unrecognized_square_dat: ($) => seq("~[", /[^\]]+/, "]"),
     unrecognized_paren_dat: ($) => seq("~(", /[^)]+/, ")"),
