@@ -1,6 +1,5 @@
 node_modules/
 dist/
-src/
 
 # Scratch file for interactive testing
 scratch.html
