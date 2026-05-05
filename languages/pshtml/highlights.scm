@@ -3,6 +3,9 @@
   "]"
   "~("
   ")"
+  (if_end_tag ("[/"))
+  (tlist_sql "[/")
+  (else_tag ("["))
 ] @punctuation.bracket
 [
   ";"
@@ -27,16 +30,13 @@
 
 "tlist_sql" @keyword.control
 
-"~[if" @keyword.control
-"[else" @keyword.control
-"[/if" @keyword.control
+"if" @keyword.control
+"else" @keyword.control
+(condition_lhs) @string
+(condition_operator) @operator
+(condition_rhs) @string
+(label) @string
 
-(ps_condition_path) @variable
-(ps_condition_operator) @operator
-(ps_condition_operand) @string
-(ps_condition_label) @string
-
-; TODO: Why does ChatGPT recommend highlights for HTML?
 (tag_name) @tag
 (erroneous_end_tag_name) @tag.error
 (doctype) @constant

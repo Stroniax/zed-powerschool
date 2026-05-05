@@ -8,9 +8,11 @@
   (start_tag) @start
   (end_tag)? @end) @indent
 
-(ps_if
-    (ps_if_tag) @start
-    (ps_if_end_tag)? @end
+(if_block
+    (if_start_tag) @start
+    (else_tag)? @start
+    (else_tag)? @end
+    (if_end_tag)? @end
     ) @indent
 
 (tlist_query) @indent

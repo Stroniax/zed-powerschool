@@ -4,20 +4,20 @@
     (start_tag
         (tag_name) @name)) @item
 
-(ps_if
-    (ps_if_else_tag
-        ("[else" @name)
-        (ps_condition_label) @name
+(if_block
+    else_tag: (else_tag
+        "else" @name
+        (label)? @name
     )
-   (ps_else_content) @item
+    alternative: (block_content) @item
 )
 
-(ps_if
-    (ps_if_tag
-        ("~[if" @name)
-        (ps_condition_label) @name
+(if_block
+    open: (if_start_tag
+        "if" @name
+        (label)? @name
     )
-   (ps_if_content) @item
+    consequent: (block_content) @item
 )
 
 (tlist_sql
@@ -32,8 +32,6 @@
     (dat_option
         (dat_option_name) @name) @item
 )
-
-
 
 (tlist_sql
     ("tlist_sql" @name)
