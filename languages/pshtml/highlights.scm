@@ -14,7 +14,7 @@
 (comment_dat) @comment
 
 (paren_dat
-  (dat_name)) @variable
+  (dat_name)) @function
 (square_dat
   (dat_name)) @function
 (dat_option_name) @attribute
