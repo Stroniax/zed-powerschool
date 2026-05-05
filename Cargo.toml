@@ -1,0 +1,15 @@
+[package]
+name = "pshtml-zed"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+path = "pshtml-zed/src/lib.rs"
+crate-type = ["cdylib"]
+
+[dependencies]
+zed_extension_api = "0.7.0"
+
+[workspace]
+resolver = "3"
+members = ["pshtml-lsp"]
