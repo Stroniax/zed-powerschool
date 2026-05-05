@@ -7,6 +7,7 @@
 ("<" @open ">" @close)
 ("<" @open "/>" @close)
 ("\"" @open "\"" @close)
+(parenthetical ("(" @open ")" @close))
 
 ((element
     (start_tag) @open

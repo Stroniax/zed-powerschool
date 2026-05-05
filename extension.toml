@@ -10,4 +10,4 @@ snippets = ["./snippets/powerschool html.json"]
 
 [grammars.pshtml]
 repository = "https://github.com/Stroniax/tree-sitter-pshtml"
-rev = "5d2ffec06048160c9053d6ebf065c82d57e36816"
+rev = "d4bd02d2327880dd2fb9512009bf5669cd266e75"
