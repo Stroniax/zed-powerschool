@@ -34,7 +34,7 @@ impl LanguageServer for PshtmlLanguageServer {
                 ..Default::default()
             },
             server_info: Some(ServerInfo {
-                name: "PowerSchool HTML".into(),
+                name: "pshtml-language-server".into(),
                 version: Some("0.0.1".into()),
             }),
         };
@@ -43,7 +43,7 @@ impl LanguageServer for PshtmlLanguageServer {
     }
 
     async fn shutdown(&self) -> Result<()> {
-        todo!()
+        Ok(())
     }
 
     /// The [`textDocument/hover`] request asks the server for hover information at a given text

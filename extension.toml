@@ -11,3 +11,10 @@ snippets = ["./snippets/powerschool html.json"]
 [grammars.pshtml]
 repository = "https://github.com/Stroniax/tree-sitter-pshtml"
 rev = "d4bd02d2327880dd2fb9512009bf5669cd266e75"
+
+[language_servers.pshtml-language-server]
+name = "PowerSchool HTML Language Server"
+languages = ["HTML", "pshtml", "powerschool html"]
+
+[language_servers.pshtml-language-server.language-ids]
+"HTML" = "html"

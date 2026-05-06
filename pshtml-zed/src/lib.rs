@@ -9,6 +9,14 @@ impl zed::Extension for PowerSchoolExtension {
     {
         PowerSchoolExtension
     }
+
+    fn language_server_command(
+        &mut self,
+        _language_server_id: &zed::LanguageServerId,
+        _worktree: &zed::Worktree,
+    ) -> zed_extension_api::Result<zed::Command> {
+        Ok(zed::Command::new("cargo").args(["run", "-p", "pshtml-lsp"]))
+    }
 }
 
 zed::register_extension!(PowerSchoolExtension);
