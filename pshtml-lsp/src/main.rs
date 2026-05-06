@@ -6,6 +6,7 @@ use tower_lsp::{
         InitializeResult, MarkedString, ServerCapabilities, ServerInfo,
     },
 };
+use tree_sitter::Parser;
 
 #[tokio::main]
 async fn main() {
